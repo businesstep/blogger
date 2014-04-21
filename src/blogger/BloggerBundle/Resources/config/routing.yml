@@ -1,0 +1,3 @@
+blogger_blogger_homepage:
+    pattern:  /hello/{user}
+    defaults: { _controller: bloggerBloggerBundle:Default:index }
