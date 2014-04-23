@@ -10,7 +10,7 @@ class __TwigTemplate_2aa9edb660775006e6557899473ae75f29765b952623a8b9c05a4bde906
         $this->parent = $this->env->loadTemplate("bloggerBloggerBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,10 +25,12 @@ class __TwigTemplate_2aa9edb660775006e6557899473ae75f29765b952623a8b9c05a4bde906
     }
 
     // line 3
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 4
-        echo "    Blog homepage
+        echo "    hello ";
+        echo twig_escape_filter($this->env, $this->getContext($context, "name"), "html", null, true);
+        echo "
 ";
     }
 

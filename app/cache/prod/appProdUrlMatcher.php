@@ -28,9 +28,19 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $request = $this->request;
 
         // blogger_blogger_homepage
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<user>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blogger_blogger_homepage')), array (  '_controller' => 'blogger\\BloggerBundle\\Controller\\DefaultController::indexAction',));
+        if (rtrim($pathinfo, '/') === '') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_blogger_blogger_homepage;
+            }
+
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'blogger_blogger_homepage');
+            }
+
+            return array (  '_controller' => 'blogger\\BloggerBundle\\Controller\\DefaultController::indexAction',  '_route' => 'blogger_blogger_homepage',);
         }
+        not_blogger_blogger_homepage:
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }

@@ -1,6 +1,10 @@
 {% extends '::base.html.twig' %}
 
-{#% block content %}{% endblock %#}
+{% block bodycontent %}
+    <h1>Blog Application</h1>
+
+    {% block content %}{% endblock %}
+{% endblock %}
 
 {% block sidebar %}
     side bar content
