@@ -150,6 +150,28 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_blogger_blogger_homepage:
 
+        // blogger_blogger_about
+        if ($pathinfo === '/about') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_blogger_blogger_about;
+            }
+
+            return array (  '_controller' => 'blogger\\BloggerBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'blogger_blogger_about',);
+        }
+        not_blogger_blogger_about:
+
+        // blogger_blogger_contacts
+        if ($pathinfo === '/contacts') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_blogger_blogger_contacts;
+            }
+
+            return array (  '_controller' => 'blogger\\BloggerBundle\\Controller\\DefaultController::contactsAction',  '_route' => 'blogger_blogger_contacts',);
+        }
+        not_blogger_blogger_contacts:
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

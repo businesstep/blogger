@@ -11,4 +11,14 @@ class DefaultController extends Controller
         $name = "test1";
         return $this->render('bloggerBloggerBundle:Default:index.html.twig', array('name' => $name));
     }
+
+    public function aboutAction()
+    {
+        return $this -> render('bloggerBloggerBundle:Default:about.html.twig');
+    }
+
+    public function contactsAction()
+    {
+        return $this -> render('bloggerBloggerBundle:Default:contacts.html.twig');
+    }
 }

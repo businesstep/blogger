@@ -3,3 +3,16 @@ blogger_blogger_homepage:
     defaults: { _controller: bloggerBloggerBundle:Default:index }
     requirements:
         _method:  GET
+
+blogger_blogger_about:
+    pattern:  /about
+    defaults: { _controller: bloggerBloggerBundle:Default:about }
+    requirements:
+        _method:  GET
+
+
+blogger_blogger_contacts:
+    pattern: /contacts
+    defaults: { _controller: bloggerBloggerBundle:Default:contacts }
+    requirements:
+        _method: GET
