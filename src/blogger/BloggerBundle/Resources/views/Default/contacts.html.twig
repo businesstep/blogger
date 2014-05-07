@@ -6,7 +6,25 @@
     <header>
         <h1>Contacts</h1>
     </header>
+
+    {% if app.session.hasFlash('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ app.session.flash('blogger-notice') }}
+        </div>
+    {% endif %}
+
     <article>
-        <p>address</p>
+        <form action="{{ path('blogger_blogger_contacts') }}" method="post" {{ form_enctype(form) }} class="blogger">
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.subject) }}
+            {{ form_row(form.body) }}
+
+            {{ form_rest(form) }}
+
+            <input type="submit" value="submit" />
+        </from>
     </article>
 {% endblock %}
