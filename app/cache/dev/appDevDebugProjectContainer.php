@@ -3460,6 +3460,7 @@ class appDevDebugProjectContainer extends Container
             'mailer_password' => 'gmail2011com',
             'locale' => 'ru_RU',
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'blogger_blog.emails.contact_email' => 'ivan.popko@mail.ru',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',

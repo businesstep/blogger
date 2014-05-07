@@ -43,7 +43,9 @@ class DefaultController extends Controller
 
                 $this -> get('mailer') -> send($message);
 
-                $this -> get('session') -> setFlash('blogger-notice', 'Send was successful. Thank you.');
+                //$this -> get('session') -> setFlash('blogger-notice', 'Send was successful. Thank you.');
+                $this -> get('session') -> getFlashBag() -> add('blogger-notice', 'Send was successful. Thank you.');
+
                 
                 return $this -> redirect( $this -> generateUrl('blogger_blogger_contacts') );
             }

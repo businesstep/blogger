@@ -7,11 +7,12 @@
         <h1>Contacts</h1>
     </header>
 
-    {% if app.session.hasFlash('blogger-notice') %}
-        <div class="blogger-notice">
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {{ flashMessage }}
+        <div class="blogger-notice"> 132
             {{ app.session.flash('blogger-notice') }}
         </div>
-    {% endif %}
+    {% endfor %}
 
     <article>
         <form action="{{ path('blogger_blogger_contacts') }}" method="post" {{ form_enctype(form) }} class="blogger">
