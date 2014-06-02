@@ -1,3 +1,14 @@
+#
+#dev_blog_task:
+#    resource: "@DevBlogTaskBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+
+dev_blog_task:
+    resource: "@DevBlogTaskBundle/Resources/config/routing.yml"
+    prefix:   /Dev
+
+
 blogger_blogger:
     resource: "@bloggerBloggerBundle/Resources/config/routing.yml"
     prefix:   /

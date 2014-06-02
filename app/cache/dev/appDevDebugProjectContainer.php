@@ -606,8 +606,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_d79873e59e910fe9f7061abdd1fd7375d939d8c75ebf0c75e38b719f476507dc');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_d79873e59e910fe9f7061abdd1fd7375d939d8c75ebf0c75e38b719f476507dc');
@@ -615,23 +614,29 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_d79873e59e910fe9f7061abdd1fd7375d939d8c75ebf0c75e38b719f476507dc');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => '/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Entity')), 'blogger\\BloggerBundle\\Entity');
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_d79873e59e910fe9f7061abdd1fd7375d939d8c75ebf0c75e38b719f476507dc');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('bloggerBloggerBundle' => 'blogger\\BloggerBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('/home/ivan/projects/businesstep.ru/blogger/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(true);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Entity', 1 => '/home/ivan/projects/businesstep.ru/blogger/src/Dev/BlogTaskBundle/Entity'));
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'blogger\\BloggerBundle\\Entity');
+        $f->addDriver($e, 'Dev\\BlogTaskBundle\\Entity');
+
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('bloggerBloggerBundle' => 'blogger\\BloggerBundle\\Entity', 'DevBlogTaskBundle' => 'Dev\\BlogTaskBundle\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('/home/ivan/projects/businesstep.ru/blogger/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(true);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -2954,6 +2959,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Resources/views', 'Swiftmailer');
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/views', 'Doctrine');
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Resources/views', 'bloggerBlogger');
+        $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/src/Dev/BlogTaskBundle/Resources/views', 'DevBlogTask');
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/src/Acme/DemoBundle/Resources/views', 'AcmeDemo');
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('/home/ivan/projects/businesstep.ru/blogger/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
@@ -3439,6 +3445,7 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle',
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'bloggerBloggerBundle' => 'blogger\\BloggerBundle\\bloggerBloggerBundle',
+                'DevBlogTaskBundle' => 'Dev\\BlogTaskBundle\\DevBlogTaskBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',

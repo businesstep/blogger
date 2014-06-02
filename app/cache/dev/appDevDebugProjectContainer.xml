@@ -17,6 +17,7 @@
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="bloggerBloggerBundle">blogger\BloggerBundle\bloggerBloggerBundle</parameter>
+      <parameter key="DevBlogTaskBundle">Dev\BlogTaskBundle\DevBlogTaskBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -2320,6 +2321,7 @@
           <call method="setEntityNamespaces">
             <argument type="collection">
               <argument key="bloggerBloggerBundle">blogger\BloggerBundle\Entity</argument>
+              <argument key="DevBlogTaskBundle">Dev\BlogTaskBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2358,10 +2360,23 @@
                       <argument type="service" id="annotation_reader"/>
                       <argument type="collection">
                         <argument>/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Entity</argument>
+                        <argument>/home/ivan/projects/businesstep.ru/blogger/src/Dev/BlogTaskBundle/Entity</argument>
                       </argument>
                     </service>
                   </argument>
                   <argument>blogger\BloggerBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Entity</argument>
+                        <argument>/home/ivan/projects/businesstep.ru/blogger/src/Dev/BlogTaskBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Dev\BlogTaskBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -2742,6 +2757,10 @@
       <call method="addPath">
         <argument>/home/ivan/projects/businesstep.ru/blogger/src/blogger/BloggerBundle/Resources/views</argument>
         <argument>bloggerBlogger</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/ivan/projects/businesstep.ru/blogger/src/Dev/BlogTaskBundle/Resources/views</argument>
+        <argument>DevBlogTask</argument>
       </call>
       <call method="addPath">
         <argument>/home/ivan/projects/businesstep.ru/blogger/src/Acme/DemoBundle/Resources/views</argument>
